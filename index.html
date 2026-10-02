@@ -118,7 +118,7 @@ function clearConfig(){localStorage.removeItem('nb_url');localStorage.removeItem
 function key(n){if($('pin').value.length<4)$('pin').value+=n}
 function enter(){if($('pin').value!=='1234'){toast('PIN incorrecto');return}user=$('user').value;$('login').classList.add('hidden');$('app').classList.remove('hidden');$('session').textContent='Sesión: '+user;buildNav();loadData()}
 function logout(){$('app').classList.add('hidden');$('login').classList.remove('hidden');$('pin').value=''}
-function buildNav(){let a=user==='Administrador';$('nav').innerHTML='<button class="active" onclick="go(\\'home\\',this)">Inicio</button><button onclick="go(\\'sale\\',this)">➕ Registrar corte</button>'+(a?'<button onclick="go(\\'reports\\',this)">📊 Reportes</button><button onclick="go(\\'close\\',this)">💵 Cierre</button>':'')}
+function buildNav(){let a=user==='Administrador';$('nav').innerHTML=`<button class="active" onclick="go('home',this)">Inicio</button><button onclick="go('sale',this)">➕ Registrar corte</button>`+(a?`<button onclick="go('reports',this)">📊 Reportes</button><button onclick="go('close',this)">💵 Cierre</button>`:'')}
 function go(id,b){document.querySelectorAll('#app section').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
 async function loadData(){
   const [b,s]=await Promise.all([sb.from('nb_barbers').select('*').eq('active',true).order('name'),sb.from('nb_services').select('*').eq('active',true).order('id')]);
